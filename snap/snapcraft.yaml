@@ -1,0 +1,56 @@
+name: anubis
+summary: Stop incoming HTTP requests from AI crawlers using proof-of-work.
+description: |
+  Anubis weighs the soul of your connection using a sha256 proof-of-work challenge in order to protect upstream resources from scraper bots.
+
+adopt-info: anubis
+
+version: "1.16.0"
+
+base: core24
+
+platforms:
+  amd64:
+  arm64:
+  riscv64:
+
+confinement: strict
+
+grade: stable
+
+
+issues: https://github.com/lgp171188/anubis-snap/issues
+
+license: MIT
+
+apps:
+  anubis:
+    command: bin/anubis
+    plugs:
+      - network-bind
+
+parts:
+  anubis:
+    plugin: dump
+    build-packages:
+      - brotli
+      - esbuild
+      - gzip
+      - zstd
+    build-snaps:
+      - go/latest/stable
+      - node/22/stable
+    source: https://github.com/TecharoHQ/anubis.git
+    source-type: git
+    source-tag: "v$SNAPCRAFT_PROJECT_VERSION"
+    source-depth: 1
+    build-environment:
+      - PATH: ${CRAFT_PART_BUILD}/node_modules/.bin:${PATH}
+    override-pull: |
+      craftctl default
+      craftctl set version="$(git describe --exact-match --tags --match=v*.*.* | sed 's/v//')"
+    override-build: |
+      make deps
+      make assets
+      make build
+      install -Dm755 ${CRAFT_PART_BUILD}/var/anubis ${CRAFT_PART_INSTALL}/bin/anubis
