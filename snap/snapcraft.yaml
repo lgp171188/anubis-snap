@@ -31,14 +31,28 @@ apps:
 parts:
   anubis:
     plugin: dump
+    # There is no riscv64 snap for node or an official distribution from
+    # upstream. So we install the npm package from the Ubuntu archive for
+    # riscv64 and on the other supported architectures, we install the node
+    # snap.
     build-packages:
-      - brotli
-      - esbuild
-      - gzip
-      - zstd
+      - to riscv64:
+          - brotli
+          - esbuild
+          - gzip
+          - npm
+          - zstd
+      - else:
+          - brotli
+          - esbuild
+          - gzip
+          - zstd
     build-snaps:
-      - go/latest/stable
-      - node/22/stable
+      - to riscv64:
+          - go/latest/stable
+      - else:
+          - go/latest/stable
+          - node/22/stable
     source: https://github.com/TecharoHQ/anubis.git
     source-type: git
     source-tag: "v$SNAPCRAFT_PROJECT_VERSION"
