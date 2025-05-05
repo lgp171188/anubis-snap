@@ -1,4 +1,4 @@
-name: anubis
+name: anubis-anti-scraper
 summary: Stop incoming HTTP requests from AI crawlers using proof-of-work.
 description: |
   Anubis weighs the soul of your connection using a sha256 proof-of-work challenge in order to protect upstream resources from scraper bots.
