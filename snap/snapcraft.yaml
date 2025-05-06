@@ -26,6 +26,9 @@ apps:
   anubis-anti-scraper:
     command: bin/anubis
     plugs:
+      # Some options require being able to read/write files. So this provides
+      # a limited way for that.
+      - home
       - network-bind
 
 parts:
