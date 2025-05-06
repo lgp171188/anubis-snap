@@ -23,7 +23,7 @@ issues: https://github.com/lgp171188/anubis-snap/issues
 license: MIT
 
 apps:
-  anubis:
+  anubis-anti-scraper:
     command: bin/anubis
     plugs:
       - network-bind
