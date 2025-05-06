@@ -5,7 +5,7 @@ description: |
 
 adopt-info: anubis
 
-version: "1.17.1"
+version: "1.18.0-pre1"
 
 base: core24
 
