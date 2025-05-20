@@ -58,7 +58,10 @@ parts:
           - node/22/stable
     source: https://github.com/TecharoHQ/anubis.git
     source-type: git
-    source-tag: "v$SNAPCRAFT_PROJECT_VERSION"
+    # Workaround for the below till the snapcraft 8.9 bug that doesn't
+    # evaluate project variables is fixed.
+    # source-tag: "v$SNAPCRAFT_PROJECT_VERSION"
+    source-tag: "v1.18.0"
     source-depth: 1
     build-environment:
       - PATH: ${CRAFT_PART_BUILD}/node_modules/.bin:${PATH}
