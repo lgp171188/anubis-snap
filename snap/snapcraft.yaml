@@ -24,7 +24,7 @@ license: MIT
 
 apps:
   anubis-anti-scraper:
-    command: bin/anubis
+    command: usr/bin/anubis
     plugs:
       # Some options require being able to read/write files. So this provides
       # a limited way for that.
@@ -69,4 +69,9 @@ parts:
       make deps
       make assets
       make build
-      install -Dm755 ${CRAFT_PART_BUILD}/var/anubis ${CRAFT_PART_INSTALL}/bin/anubis
+      install -Dm755 ${CRAFT_PART_BUILD}/var/anubis ${CRAFT_PART_INSTALL}/usr/bin/anubis
+      install -Dm644 ${CRAFT_PART_BUILD}/run/default.env ${CRAFT_PART_INSTALL}/etc/anubis/default.env
+      install -Dm644 ${CRAFT_PART_BUILD}/run/anubis@.service ${CRAFT_PART_INSTALL}/usr/lib/systemd/system/anubis@.service
+      install -Dm644 ${CRAFT_PART_BUILD}/data/botPolicies.json ${CRAFT_PART_INSTALL}/usr/share/doc/anubis/botPolicies.json
+      install -Dm644 ${CRAFT_PART_BUILD}/data/botPolicies.yaml ${CRAFT_PART_INSTALL}/usr/share/doc/anubis/botPolicies.yaml
+      install -Dm644 ${CRAFT_PART_BUILD}/LICENSE ${CRAFT_PART_INSTALL}/usr/share/licenses/anubis/LICENSE
